@@ -1,12 +1,15 @@
 import http from 'http';
 import logging from './config/logging';
 import config from './config/config';
-import express, { Request, Response } from 'express';
+import express, { Request, response, Response } from 'express';
 import * as Service from './items/service';
 import { Burger } from './items/IProduct';
 
 const NAMESPACE = 'Server';
 const router = express();
+
+router.set('views', './views');
+router.set('view engine', 'ejs');
 
 router.use((req, res, next) => {
     logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
@@ -17,61 +20,32 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/get', async (req: Request, res: Response) => {
-    const id: number = parseInt(req.params.id, 10);
-
+router.get('/', async (req: Request, res: Response) => {
     try {
-        const item: Burger[] = await Service.AllOrders();
-
-        if (item) {
-            return res.status(200).send(item);
-        }
-
-        res.status(404).send('item not found');
+        res.render('index', {
+            items: await Service.AllOrders()
+        });
     } catch (e: any) {
         res.status(500).send(e.message);
     }
 });
 
 router.get('/:id/get', async (req: Request, res: Response) => {
-    const id: number = parseInt(req.params.id, 10);
-
+    var id: number = parseInt(req.params.id, 10);
     try {
-        const item: Burger[] = await Service.find(id);
-
-        if (item) {
-            return res.status(200).send(item);
-        }
-
-        res.status(404).send('item not found');
+        res.render('index', {
+            items: await Service.find(id)
+        });
     } catch (e: any) {
         res.status(500).send(e.message);
     }
 });
-
-router.get('/sumOf', async (req: Request, res: Response) => {
-    try {
-        const item: number = await Service.sumOfAllBurgers();
-
-        if (item) {
-            return res.status(500).send(item);
-        }
-
-        res.status(404).send('item not found');
-    } catch (e: any) {
-        res.status(500).send(e.message);
-    }
-});
-
 router.get('/costOfEvery', async (req: Request, res: Response) => {
     try {
-        const item: object = await Service.costOfOrder();
-
-        if (item) {
-            return res.status(200).send(item);
-        }
-
-        res.status(404).send('item not found');
+        res.render('objToArr', {
+            items: await Service.costOfOrder(),
+            sumOf: await Service.sumOfAllBurgers()
+        });
     } catch (e: any) {
         res.status(500).send(e.message);
     }

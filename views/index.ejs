@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body class="container">
+        <main>
+            <div class="jumbotron">
+                <p>Orders: <a class="nav-link" href="/costOfEvery">Cost Of All Orders</a></p>
+                <ul>
+                    <% items.forEach(function(elm) { %>
+                    <li>
+                        <strong><%= elm._title %></strong>
+                        <p>COST: <%= elm._cost %></p>
+                        <p>ORDER: <%= elm._order %></p>
+                        <p>LIKE: <%= elm._like %></p>
+                        <p>AMOUNT: <%= elm._amount %></p>
+                    </li>
+                    <% }); %>
+                </ul>
+            </div>
+        </main>
+    </body>
+</html>
