@@ -3,7 +3,6 @@ import logging from './config/logging';
 import config from './config/config';
 import express, { Request, response, Response } from 'express';
 import * as Service from './items/service';
-import { Burger } from './items/IProduct';
 
 const NAMESPACE = 'Server';
 const router = express();
@@ -19,7 +18,6 @@ router.use((req, res, next) => {
     });
     next();
 });
-
 router.get('/', async (req: Request, res: Response) => {
     try {
         res.render('index', {
@@ -99,13 +97,9 @@ router.get('/:order/:naming/:amount/dec', async (req: Request, res: Response) =>
 });
 router.get('/sort', async (req: Request, res: Response) => {
     try {
-        const item: object = await Service.sortOrders();
-
-        if (item) {
-            return res.status(200).send(item);
-        }
-
-        res.status(404).send('item not found');
+        res.render('index', {
+            items: await Service.sortOrders()
+        });
     } catch (e: any) {
         res.status(500).send(e.message);
     }

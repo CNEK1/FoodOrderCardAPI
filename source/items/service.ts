@@ -1,17 +1,17 @@
-import { Burger } from './IProduct';
+import { Burger, ProductJson } from './IProduct';
 
 let items: Array<Burger> = [
-    new Burger('Burger', 14.23, true, 10, 43431),
-    new Burger('BurgerWithChease', 11.2, false, 20, 43433),
-    new Burger('BurgerWithMeat', 22, true, 30, 43433),
-    new Burger('Burger', 14.23, true, 10, 43438)
+    new Burger('Burger', 14.23, true, 10, 5),
+    new Burger('BurgerWithChease', 11.2, false, 20, 11),
+    new Burger('BurgerWithMeat', 22, true, 30, 4),
+    new Burger('Burger', 14.23, true, 10, 20)
 ];
 
 export const AllOrders = async (): Promise<Array<Burger>> => items;
 
 export const find = async (id: number): Promise<Array<Burger>> => items.filter((elm) => elm._order == id);
 
-export const sumOfAllBurgers = async (): Promise<number> => items.map((elm) => elm._cost).reduce((sum, x) => sum + x);
+export const sumOfAllBurgers = async (): Promise<number> => items.map((elm) => elm._cost).reduce((sum, x) => parseFloat((sum + x).toFixed(2)));
 
 export const costOfOrder = async (): Promise<object> => {
     let result: any = {};

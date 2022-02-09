@@ -3,7 +3,15 @@
     <body class="container">
         <main>
             <div class="jumbotron">
-                <p>Orders: <a class="nav-link" href="/costOfEvery">Cost Of All Orders</a></p>
+                <p>
+                    <strong>Orders:</strong>
+                    <p><a class="nav-link" href="/costOfEvery">Cost Of All Orders</a></p>
+                    <P>
+                    <button>
+                        <a href="/sort">Sort</a>
+                    </button>
+                </p>
+                </p>
                 <ul>
                     <% items.forEach(function(elm) { %>
                     <li>
