@@ -1,10 +1,11 @@
 import { Burger, ProductJson } from './IProduct';
 
 let items: Array<Burger> = [
-    new Burger('Burger', 14.23, true, 10, 5),
-    new Burger('BurgerWithChease', 11.2, false, 20, 11),
-    new Burger('BurgerWithMeat', 22, true, 30, 4),
-    new Burger('Burger', 14.23, true, 10, 20)
+    new Burger('Burger', 14.25, true, 10, 43128),
+    new Burger('BurgerWithChease', 11.2, false, 20, 43132),
+    new Burger('BurgerWithMeat', 25, true, 30, 43128),
+    new Burger('Burger', 14.23, true, 10, 43132),
+    new Burger('kEK', 14.23, true, 10, 43135)
 ];
 
 export const AllOrders = async (): Promise<Array<Burger>> => items;

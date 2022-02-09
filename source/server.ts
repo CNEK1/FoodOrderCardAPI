@@ -1,7 +1,7 @@
 import http from 'http';
 import logging from './config/logging';
 import config from './config/config';
-import express, { Request, response, Response } from 'express';
+import express, { Request, Response } from 'express';
 import * as Service from './items/service';
 
 const NAMESPACE = 'Server';
