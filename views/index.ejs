@@ -3,14 +3,11 @@
     <body class="container">
         <main>
             <div class="jumbotron">
+                <strong>Orders:</strong>
+                <p><a class="nav-link" href="/costOfEvery">Cost Of All Orders</a></p>
                 <p>
-                    <strong>Orders:</strong>
-                    <p><a class="nav-link" href="/costOfEvery">Cost Of All Orders</a></p>
-                    <P>
-                    <button>
-                        <a href="/sort">Sort</a>
-                    </button>
-                </p>
+                    <button><a class="nav-link" href="/sortHighToLow">High To Low</a></button>
+                    <button><a class="nav-link" href="/sortLowToHigh">Low To High</a></button>
                 </p>
                 <ul>
                     <% items.forEach(function(elm) { %>

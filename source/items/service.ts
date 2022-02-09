@@ -48,6 +48,9 @@ export const decreaseAmount = async (amount: number, order: number, naming: stri
     });
     return items;
 };
-export const sortOrders = async (): Promise<Array<Burger>> => {
+export const sortOrdersLowToHigh = async (): Promise<Array<Burger>> => {
     return items.sort((x, y) => x._order - y._order);
+};
+export const sortOrdersHighToLow = async (): Promise<Array<Burger>> => {
+    return items.sort((x, y) => y._order - x._order);
 };

@@ -95,15 +95,23 @@ router.get('/:order/:naming/:amount/dec', async (req: Request, res: Response) =>
         res.status(500).send(e.message);
     }
 });
-router.get('/sort', async (req: Request, res: Response) => {
+router.get('/sortLowToHigh', async (req: Request, res: Response) => {
     try {
         res.render('index', {
-            items: await Service.sortOrders()
+            items: await Service.sortOrdersLowToHigh()
         });
     } catch (e: any) {
         res.status(500).send(e.message);
     }
 });
-
+router.get('/sortHighToLow', async (req: Request, res: Response) => {
+    try {
+        res.render('index', {
+            items: await Service.sortOrdersHighToLow()
+        });
+    } catch (e: any) {
+        res.status(500).send(e.message);
+    }
+});
 const httpServer = http.createServer(router);
 httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`));
