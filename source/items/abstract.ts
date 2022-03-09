@@ -1,7 +1,7 @@
-import { ProductJson } from "./IProduct";
+import { ProductJson } from './IProduct';
 
 export abstract class Product implements ProductJson {
-    protected constructor(protected _title: string, protected _cost: number, protected _like: boolean, protected _amount:number, protected _order:number) {}
+    protected constructor(protected _title: string, protected _cost: number, protected _like: boolean, protected _amount: number, protected _order: number) {}
 
     abstract get cost(): number;
     abstract set cost(value: number);

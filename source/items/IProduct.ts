@@ -1,4 +1,4 @@
-import { Product } from "./abstract";
+import { Product } from './abstract';
 
 export interface ProductJson {
     title: string;
