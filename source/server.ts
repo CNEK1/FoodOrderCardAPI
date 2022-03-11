@@ -28,7 +28,8 @@ router.get('/:id/order', async (req: Request, res: Response) => {
     var id: number = parseInt(req.params.id, 10);
     try {
         res.json({
-            items: await Service.find(id)
+            items: await Service.find(id),
+            costOf: await Service.costOfOrder(id)
         });
     } catch (e: any) {
         res.status(500).send(e.message);
@@ -37,7 +38,7 @@ router.get('/:id/order', async (req: Request, res: Response) => {
 router.get('/costOfEvery', async (req: Request, res: Response) => {
     try {
         res.json({
-            items: await Service.costOfOrder(),
+            items: await Service.costOfOrders(),
             sumOf: await Service.sumOfAllBurgers()
         });
     } catch (e: any) {

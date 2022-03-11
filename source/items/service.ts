@@ -14,7 +14,9 @@ export const find = async (id: number): Promise<Array<Burger>> => items.filter((
 
 export const sumOfAllBurgers = async (): Promise<number> => items.map((elm) => elm._cost).reduce((sum, x) => parseFloat((sum + x).toFixed(2)));
 
-export const costOfOrder = async (): Promise<object> => {
+export const costOfOrder = async (id: number): Promise<number> => (await find(id)).map((elm) => elm._cost).reduce((x, y) => parseFloat((x + y).toFixed(2)));
+
+export const costOfOrders = async (): Promise<object> => {
     let result: any = {};
     items.forEach((elm) => {
         if (result[elm._order] != undefined) {
