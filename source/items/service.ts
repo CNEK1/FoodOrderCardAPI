@@ -4,8 +4,8 @@ let items: Array<Burger> = [
     new Burger('Burger', 14.25, true, 10, 43128),
     new Burger('BurgerWithChease', 11.2, false, 20, 43132),
     new Burger('BurgerWithMeat', 25, true, 30, 43128),
-    new Burger('Burger', 14.23, true, 10, 43132),
-    new Burger('kEK', 14.23, true, 10, 43135)
+    new Burger('SuperBurger', 14.23, true, 10, 43132),
+    new Burger('MegaBurger', 14.23, true, 10, 43135)
 ];
 
 export const AllOrders = async (): Promise<Array<Burger>> => items;

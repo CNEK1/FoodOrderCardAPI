@@ -24,16 +24,16 @@ router.get('/get', async (req: Request, res: Response) => {
     }
 });
 
-// router.get('/:id/get', async (req: Request, res: Response) => {
-//     var id: number = parseInt(req.params.id, 10);
-//     try {
-//         res.render('index', {
-//             items: await Service.find(id)
-//         });
-//     } catch (e: any) {
-//         res.status(500).send(e.message);
-//     }
-// });
+router.get('/:id/order', async (req: Request, res: Response) => {
+    var id: number = parseInt(req.params.id, 10);
+    try {
+        res.json({
+            items: await Service.find(id)
+        });
+    } catch (e: any) {
+        res.status(500).send(e.message);
+    }
+});
 router.get('/costOfEvery', async (req: Request, res: Response) => {
     try {
         res.json({
@@ -91,23 +91,23 @@ router.get('/costOfEvery', async (req: Request, res: Response) => {
 //         res.status(500).send(e.message);
 //     }
 // });
-// router.get('/sortLowToHigh', async (req: Request, res: Response) => {
-//     try {
-//         res.render('index', {
-//             items: await Service.sortOrdersLowToHigh()
-//         });
-//     } catch (e: any) {
-//         res.status(500).send(e.message);
-//     }
-// });
-// router.get('/sortHighToLow', async (req: Request, res: Response) => {
-//     try {
-//         res.render('index', {
-//             items: await Service.sortOrdersHighToLow()
-//         });
-//     } catch (e: any) {
-//         res.status(500).send(e.message);
-//     }
-// });
+router.get('/sortLowToHigh', async (req: Request, res: Response) => {
+    try {
+        res.json({
+            items: await Service.sortOrdersLowToHigh()
+        });
+    } catch (e: any) {
+        res.status(500).send(e.message);
+    }
+});
+router.get('/sortHighToLow', async (req: Request, res: Response) => {
+    try {
+        res.json({
+            items: await Service.sortOrdersHighToLow()
+        });
+    } catch (e: any) {
+        res.status(500).send(e.message);
+    }
+});
 const httpServer = http.createServer(router);
 httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`));
