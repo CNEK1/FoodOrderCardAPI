@@ -34,7 +34,7 @@ function ListOfOrders() {
                             </Thead>
                             <Tbody>
                                 {typeof anotherBackData.items === 'undefined' ? (
-                                    <p>Loading...</p>
+                                    <Button variant="ghost" isLoading loadingText="Loading" colorScheme="black" spinnerPlacement="end"></Button>
                                 ) : (
                                     Object.entries(anotherBackData.items).map(([id, values]) => (
                                         <Tr>
@@ -69,7 +69,7 @@ function ListOfOrders() {
                             </Thead>
                             <Tbody>
                                 {typeof backData.burgers === 'undefined' ? (
-                                    <p>Loading...</p>
+                                    <Button variant="ghost" isLoading loadingText="Loading" colorScheme="black" spinnerPlacement="end"></Button>
                                 ) : (
                                     backData.burgers.map((burger, e) => (
                                         <Tr key={e}>
