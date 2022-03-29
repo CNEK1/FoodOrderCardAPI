@@ -17,8 +17,8 @@ function ListFromMongo() {
             <Stack spacing={'10px'}>
                 <Center fontSize="3xl">Data From MongoDB</Center>
                 <Container maxW="container.sm">
-                    <Box w="100%" p={4} borderWidth="2px" borderRadius="lg" overflow="hidden" display="flex" alignItems="baseline">
-                        <Table size="md">
+                    <Box p={4} borderWidth="2px" borderRadius="lg" overflow="hidden" display="flex" alignItems="baseline">
+                        <Table size="sm">
                             <Thead>
                                 <Tr>
                                     <Th>Title</Th>
@@ -26,6 +26,7 @@ function ListFromMongo() {
                                     <Th>Amount</Th>
                                     <Th>Like</Th>
                                     <Th>Order</Th>
+                                    <Th>Created At</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
@@ -39,6 +40,7 @@ function ListFromMongo() {
                                             <Td>{item.amount}</Td>
                                             <Td>{JSON.stringify(item.like)}</Td>
                                             <Td>{item.order}</Td>
+                                            <Td>{item.createdAt}</Td>
                                         </Tr>
                                     ))
                                 )}
