@@ -1,4 +1,4 @@
-import { Burger, ProductJson } from './IProduct';
+import { Burger } from './IProduct';
 
 let items: Array<Burger> = [
     new Burger('Burger', 14.25, true, 10, 43128),
@@ -35,6 +35,14 @@ export const addToFav = async (order: number, naming: string): Promise<Array<Bur
     });
     return items;
 };
+export const deleteFromFav = async (order: number, naming: string): Promise<Array<Burger>> => {
+    items.forEach((elm) => {
+        if (elm._order == order && elm._title == naming) {
+            elm._like = false;
+        }
+    });
+    return items;
+};
 export const increaseAmount = async (amount: number, order: number, naming: string): Promise<Array<Burger>> => {
     items.forEach((elm) => {
         if (elm._order == order && elm._title == naming) {
@@ -57,3 +65,7 @@ export const sortOrdersLowToHigh = async (): Promise<Array<Burger>> => {
 export const sortOrdersHighToLow = async (): Promise<Array<Burger>> => {
     return items.sort((x, y) => y._order - x._order);
 };
+// export const create = async (newItems: ProductJson): Promise<Array<Burger>> =>{
+// items.push(newItems);
+// return items;
+// }

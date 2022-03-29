@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, Tr, Th, Tbody, Td, Thead, Stack, Text, Center, Box, Container } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { Button, Table, Tr, Th, Tbody, Td, Thead, Stack, Center, Box, Container } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-function Order() {
+function ListFromMongo() {
     const [backData, setBackData] = useState([{}]);
-    const {id}  = useParams();
     useEffect(() => {
-        fetch(`/${id}/order`)
+        fetch("/getAllfromDB")
             .then((res) => res.json())
             .then((data) => {
                 setBackData(data);
@@ -17,7 +15,7 @@ function Order() {
     return (
         <div>
             <Stack spacing={'10px'}>
-                <Center fontSize="3xl">Order {id}</Center>
+                <Center fontSize="3xl">Data From MongoDB</Center>
                 <Container maxW="container.sm">
                     <Box w="100%" p={4} borderWidth="2px" borderRadius="lg" overflow="hidden" display="flex" alignItems="baseline">
                         <Table size="md">
@@ -27,27 +25,28 @@ function Order() {
                                     <Th>Cost</Th>
                                     <Th>Amount</Th>
                                     <Th>Like</Th>
+                                    <Th>Order</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 {typeof backData.items === 'undefined' ? (
                                     <Button variant="ghost" isLoading colorScheme="black" spinnerPlacement="end"></Button>
                                 ) : (
-                                    backData.items.map((burger, e) => (
+                                    backData.items.map((item, e) => (
                                         <Tr key={e}>
-                                            <Td>{burger._title}</Td>
-                                            <Td>{burger._cost}$</Td>
-                                            <Td>{burger._amount}</Td>
-                                            <Td>{JSON.stringify(burger._like)}</Td>
+                                            <Td>{item.title}</Td>
+                                            <Td>{item.cost}$</Td>
+                                            <Td>{item.amount}</Td>
+                                            <Td>{JSON.stringify(item.like)}</Td>
+                                            <Td>{item.order}</Td>
                                         </Tr>
                                     ))
                                 )}
                             </Tbody>
-                            <Text>Cost of order: {backData.costOf}$</Text>
                         </Table>
                     </Box>
                 </Container>
-                <Link as={Link}  to="/">
+                <Link as={Link} to="/">
                     <Button variant="solid">Back</Button>
                 </Link>
             </Stack>
@@ -55,4 +54,4 @@ function Order() {
     );
 }
 
-export default Order;
+export default ListFromMongo;

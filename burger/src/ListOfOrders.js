@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 function ListOfOrders() {
     const [backData, setBackData] = useState([{}]);
     const [anotherBackData, setAnotherBackData] = useState([{}]);
-
     useEffect(() => {
         fetch('/get')
             .then((res) => res.json())
@@ -17,11 +16,15 @@ function ListOfOrders() {
             .then((data) => {
                 setAnotherBackData(data);
             });
+            
     }, []);
     return (
         <div>
             <Stack spacing="15px">
                 <Center fontSize="5xl">Orders</Center>
+                <Link as={Link} to="/getAllfromDB">
+                    <Button variant="link">Data from MongoDB</Button>
+                </Link>
                 <Container maxW="container.l">
                     <Text>Info:</Text>
                     <Box w="30%" p={4} borderWidth="2px" borderRadius="lg" overflow="hidden" alignItems="baseline" display="flex">
@@ -75,7 +78,7 @@ function ListOfOrders() {
                                         <Tr key={e}>
                                             <Td>{burger._title}</Td>
                                             <Td>{burger._order}</Td>
-                                            <Td>{burger._cost}$</Td>
+                                            <Td>{burger._cost}$ </Td>
                                             <Td>{burger._amount}</Td>
                                             <Td>{JSON.stringify(burger._like)}</Td>
                                         </Tr>
