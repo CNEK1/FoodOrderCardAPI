@@ -4,7 +4,7 @@ import itemsFromDB from '../items/itemsFromDB';
 
 const router = express.Router();
 
-//Routes for data from created class 
+//Routes for data from created class
 
 router.get('/get', async (req: Request, res: Response) => {
     try {
@@ -35,7 +35,7 @@ router.get('/costOfEvery', async (req: Request, res: Response) => {
         res.status(500).send(e.message);
     }
 });
-// router.post("/", 
+// router.post("/",
 // body('_title').isString(),
 // body('_cost').isNumeric(),
 // async (req: Request, res: Response) => {
@@ -45,10 +45,10 @@ router.get('/costOfEvery', async (req: Request, res: Response) => {
 //     }
 //     try {
 //       const item: Burger = req.body;
-  
+
 //       const newItem = await Service.create(item);
-  
-//       res.status(201).json(newItem); 
+
+//       res.status(201).json(newItem);
 //     } catch (e: any) {
 //       res.status(500).send(e.message);
 //     }
@@ -125,10 +125,10 @@ router.get('/costOfEvery', async (req: Request, res: Response) => {
 //     }
 // });
 
+//Routes for data from MongoDB
 
-//Routes for data from MongoDB 
-
-router.get('/getAllfromDB',itemsFromDB.getALL)
-router.post('/',itemsFromDB.createItem)
+router.get('/getAllfromDB', itemsFromDB.getALL);
+router.post('/', itemsFromDB.createItem);
+router.delete('/:id', itemsFromDB.deleteItem);
 
 export = router;

@@ -16,7 +16,6 @@ function ListOfOrders() {
             .then((data) => {
                 setAnotherBackData(data);
             });
-            
     }, []);
     return (
         <div>

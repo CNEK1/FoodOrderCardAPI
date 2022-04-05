@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Table, Tr, Th, Tbody, Td, Thead, Stack, Center, Box, Container } from '@chakra-ui/react';
+import { DeleteIcon, SettingsIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 
 function ListFromMongo() {
     const [backData, setBackData] = useState([{}]);
+    const [deleteData, setDeleteBackData] = useState([{}]);
     useEffect(() => {
-        fetch("/getAllfromDB")
+        getAll();
+    }, []);
+    const getAll = () => {
+        fetch('/getAllfromDB')
             .then((res) => res.json())
             .then((data) => {
                 setBackData(data);
             });
-    }, []);
+    };
+    const deleteId = (id) => {
+        fetch(`/${id}`, { method: 'DELETE' })
+            .then((res) => res.json())
+            .then((data) => {
+                setDeleteBackData(data);
+                getAll();
+            });
+    };
 
     return (
         <div>
@@ -41,6 +54,18 @@ function ListFromMongo() {
                                             <Td>{JSON.stringify(item.like)}</Td>
                                             <Td>{item.order}</Td>
                                             <Td>{item.createdAt}</Td>
+                                            <Button
+                                                onClick={() => {
+                                                    deleteId(item._id);
+                                                }}
+                                                size={'sm'}
+                                                variant="link"
+                                            >
+                                                <DeleteIcon></DeleteIcon>
+                                            </Button>
+                                            <Button size={'sm'} variant="link">
+                                                <SettingsIcon />
+                                            </Button>
                                         </Tr>
                                     ))
                                 )}

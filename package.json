@@ -4,7 +4,8 @@
     "description": "",
     "main": "source/server.ts",
     "scripts": {
-        "build": "shx rm -rf build/ && prettier --write source/ && tsc"
+        "build": "shx rm -rf build/ && prettier --write source/ && tsc",
+        "run": " npm start --write burger/ && nodemon source/server.ts"
     },
     "author": "",
     "license": "ISC",
