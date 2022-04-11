@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
+import { isObjectLiteralElement } from 'typescript';
 import Products from '../models/ProductJSON';
 
 const getALL = (req: Request, res: Response, next: NextFunction) => {
@@ -7,7 +8,8 @@ const getALL = (req: Request, res: Response, next: NextFunction) => {
         .exec()
         .then((result) => {
             return res.json({
-                items: result
+                items: result,
+                countOfItems: result.length
             });
         })
         .catch((error) => {
@@ -54,5 +56,28 @@ const deleteItem = (req: Request, res: Response, next: NextFunction) => {
             });
         });
 };
+const costOfEveryOrder = (req: Request, res: Response, next: NextFunction) => {
+    var objectOfMongo: any = {};
+    Products.find()
+        .exec()
+        .then((result) => {
+            res.json({
+                items: result.forEach((elm) => {
+                    if (objectOfMongo[elm.order] != undefined) {
+                        objectOfMongo[elm.order] += elm.cost;
+                    } else {
+                        objectOfMongo[elm.order] = elm.cost;
+                    }
+                    return objectOfMongo;
+                })
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
+};
 
-export default { getALL, createItem, deleteItem };
+export default { getALL, createItem, deleteItem, costOfEveryOrder };
