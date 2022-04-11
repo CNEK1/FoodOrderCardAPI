@@ -21,9 +21,11 @@ function ListOfOrders() {
         <div>
             <Stack spacing="15px">
                 <Center fontSize="5xl">Orders</Center>
-                <Link as={Link} to="/getAllfromDB">
-                    <Button variant="link">Data from MongoDB</Button>
-                </Link>
+                <Center>
+                    <Link as={Link} to="/getAllfromDB">
+                        <Button variant="link">Data from MongoDB</Button>
+                    </Link>
+                </Center>
                 <Container maxW="container.l">
                     <Text>Info:</Text>
                     <Box w="30%" p={4} borderWidth="2px" borderRadius="lg" overflow="hidden" alignItems="baseline" display="flex">

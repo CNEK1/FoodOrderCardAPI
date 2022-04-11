@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, Tr, Th, Tbody, Td, Thead, Stack, Center, Box, Container } from '@chakra-ui/react';
+import { Button, Table, Tr, Th, Tbody, Td, Thead, Stack, Center, Box, Container, Text } from '@chakra-ui/react';
 import { DeleteIcon, SettingsIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 
 function ListFromMongo() {
     const [backData, setBackData] = useState([{}]);
-    const [deleteData, setDeleteBackData] = useState([{}]);
+    const [ordersBackData, setOrdersBackData] = useState([{}]);
+    const [deleteBackData, setDeleteBackData] = useState([{}]);
+
     useEffect(() => {
         getAll();
+        getCostofEveryOrder();
     }, []);
     const getAll = () => {
         fetch('/getAllfromDB')
             .then((res) => res.json())
             .then((data) => {
                 setBackData(data);
+            });
+    };
+    const getCostofEveryOrder = () => {
+        fetch('/getEveryCost')
+            .then((res) => res.json())
+            .then((data) => {
+                setOrdersBackData(data);
             });
     };
     const deleteId = (id) => {
@@ -24,12 +34,50 @@ function ListFromMongo() {
                 getAll();
             });
     };
-
     return (
         <div>
             <Stack spacing={'10px'}>
                 <Center fontSize="3xl">Data From MongoDB</Center>
+                <Center>
+                    <Link as={Link} to="/postItem">
+                        <Button variant="solid">Emulation of new order</Button>
+                    </Link>
+                </Center>
+                <Center>Test {ordersBackData.objectOfMongo}</Center>
+                <Container maxW="container.l">
+                    <Text>Info:</Text>
+                    <Box w="30%" p={4} borderWidth="2px" borderRadius="lg" overflow="hidden" alignItems="baseline" display="flex">
+                        <Table size="sm">
+                            <Thead>
+                                <Tr>
+                                    <Th>Order</Th>
+                                    <Th>Cost</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {typeof ordersBackData.items === 'undefined' ? (
+                                    <Button variant="ghost" isLoading colorScheme="black" spinnerPlacement="end"></Button>
+                                ) : (
+                                    Object.entries(ordersBackData.items).map(([id, values]) => (
+                                        <Tr>
+                                            <Td>
+                                                {
+                                                    <Link as={Link} to={`/${id}/order`}>
+                                                        <Button variant="link">{id}</Button>
+                                                    </Link>
+                                                }
+                                            </Td>
+                                            <Td>{values}$</Td>
+                                        </Tr>
+                                    ))
+                                )}
+                                {/* //<Text> Cost of All Orders: {ordersBackData.sumOf}$</Text> */}
+                            </Tbody>
+                        </Table>
+                    </Box>
+                </Container>
                 <Container maxW="container.sm">
+                    <Text>Count of items: {backData.countOfItems}</Text>
                     <Box p={4} borderWidth="2px" borderRadius="lg" overflow="hidden" display="flex" alignItems="baseline">
                         <Table size="sm">
                             <Thead>

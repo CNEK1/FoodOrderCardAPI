@@ -128,6 +128,7 @@ router.get('/costOfEvery', async (req: Request, res: Response) => {
 //Routes for data from MongoDB
 
 router.get('/getAllfromDB', itemsFromDB.getALL);
+router.get('/getEveryCost', itemsFromDB.costOfEveryOrder);
 router.post('/', itemsFromDB.createItem);
 router.delete('/:id', itemsFromDB.deleteItem);
 

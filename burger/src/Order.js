@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Order() {
     const [backData, setBackData] = useState([{}]);
-    const {id}  = useParams();
+    const { id } = useParams();
     useEffect(() => {
         fetch(`/${id}/order`)
             .then((res) => res.json())
@@ -47,7 +47,7 @@ function Order() {
                         </Table>
                     </Box>
                 </Container>
-                <Link as={Link}  to="/">
+                <Link as={Link} to="/">
                     <Button variant="solid">Back</Button>
                 </Link>
             </Stack>
